@@ -40,10 +40,29 @@
         $query->execute([
             'author' => $author,
             'title' => $title,
-            'content' => $content,
-            'image' => $image
+            'contenu' => $content,
+            'image' => $image,
         ]);
     }
 
-
+    //Modifier un article
+    function UpdatePost($id,$author,$title,$content,$image){
+        global $pdo;
+        $query = $pdo->prepare('UPDATE posts SET author = :auteur, tittle = :titre, content = :content,
+        image = :image WHERE id = :id');
+        $query->execute([
+            'auteur'  => $author,
+            'titre' => $title,
+            'content' => $content,
+            'image' => $image,
+            'id' => $id
+        ]);
+    }
+    
+    //Supprimer un article
+    function deletePost($id){
+        global $pdo;
+        $query = $pdo->prepare('DELETE FROM posts WHERE id = :id');
+        $query->execute(['id' => $id]);
+    }
 ?>

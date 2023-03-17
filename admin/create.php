@@ -8,12 +8,13 @@ require_once '../refactoring.php';
     $author = '';
     $content = '';
 
+
     if(isset($_POST['add-post'])){
         //La gestion des erreurs sur les valeurs des champs du formulaire
         $errors = ValidatePost($_POST);
 
         //traitement de l'image
-
+        
         if(!empty($_FILES['image']['name'])){
             $image_name = time().'_'.$_FILES['image']['name'];
             $destination = "../images/$image_name";
@@ -31,8 +32,8 @@ require_once '../refactoring.php';
             $_POST['content'] = nl2br(htmlentities($_POST['content']));
             //enregistrement de l'article dans la base
     create($_POST['author'],$_POST['title'],$_POST['content'],$_POST['image']);
-    //redirection?
-    header('Location : index.php');
+    //redirection
+    header('Location: index.php');
     exit();
 
         } else {
