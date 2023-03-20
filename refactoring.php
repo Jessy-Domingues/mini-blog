@@ -65,4 +65,25 @@
         $query = $pdo->prepare('DELETE FROM posts WHERE id = :id');
         $query->execute(['id' => $id]);
     }
+    
+    //Sauvegarder les commentaires
+    function saveComment($auteur,$post_id,$comment){
+        global $pdo;
+        $query = $pdo->prepare('INSERT INTO comments(id_post,auteur,comment,created_at) 
+        VALUES (:id_post,:auteur,:comment, NOW())');
+        $query->execute([
+            'id_post'=>$post_id,
+            'auteur'=>$auteur,
+            'comment'=>$comment
+        ]);
+    }
+
+    //Récuperation des articles dans la base
+    function findAllComments($id_post){
+        global $pdo;
+        $query = $pdo->prepare('SELECT * FROM comments WHERE id_post = :post_id ORDER BY created_at DESC');
+        $query->execute(['post_id'=>$id_post]);
+        $comments = $query->fetchAll();
+        return $comments;
+    }
 ?>

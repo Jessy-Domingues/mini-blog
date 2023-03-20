@@ -2,12 +2,13 @@
 require_once 'refactoring.php';
 include_once 'traitement.php';
 
-    //selection d'un article grâce à son id
+    //selection d'un article et ses commentaires grâce à son id
     $post = selectOne($id);
+    $comments = findAllcomments($id);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
   <meta charset="UTF-8">
@@ -46,22 +47,25 @@ include_once 'traitement.php';
         </div>
         <h1>Les commentaires</h1>
         <div class="comments">
-          
+        <?php foreach($comments as $comment): ?>
             <div class="comment">
-              <h3 class="auteur">Ecrit par Ronasdev : </h3>
-              <p class="contenu" >J'apprecie beaucoup ta chaine.Continue à n ous faire du bien<br>
-              <i class="far fa-calendar"> depuis 16 Mai 2021</i>
+              <h3 class="auteur">Ecrit par <?= $comment['auteur']?> </h3>
+              <p class="contenu" ><?= $comment['comment']?><br>
+              <i class="far fa-calendar"> <?php
+              setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
+              echo date('d F, Y', strtotime($comment['created_at'])); ?></i>
               <a class="sup" href="">Supprimer</a>
               </p>
               <br>
             </div>
+            <?php endforeach; ?>
         </div>
         <br>
-        <form action="single.php"  method="post">
+        <form action="single.php?id=<?= $id?>"  method="post">
           <input type="hidden" name="id" value="<?php echo $id ?>">
           <div>
             <label>Votre Prenom:</label>
-            <input type="text" name="author" class="text-input">
+            <input type="text" name="auteur" class="text-input">
           </div>
           <div>
             <label>Body:</label>
