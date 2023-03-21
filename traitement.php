@@ -21,4 +21,6 @@ if(isset($_POST['add-comment'])){
         exit();
     }
 }
+
+
 ?>

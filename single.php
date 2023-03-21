@@ -2,6 +2,8 @@
 require_once 'refactoring.php';
 include_once 'traitement.php';
 
+
+
     //selection d'un article et ses commentaires grâce à son id
     $post = selectOne($id);
     $comments = findAllcomments($id);
@@ -49,12 +51,10 @@ include_once 'traitement.php';
         <div class="comments">
         <?php foreach($comments as $comment): ?>
             <div class="comment">
-              <h3 class="auteur">Ecrit par <?= $comment['auteur']?> </h3>
-              <p class="contenu" ><?= $comment['comment']?><br>
-              <i class="far fa-calendar"> <?php
-              setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
-              echo date('d F, Y', strtotime($comment['created_at'])); ?></i>
-              <a class="sup" href="">Supprimer</a>
+              <h3 class="auteur">Ecrit par <?= $comment['auteur'];?> </h3>
+              <p class="contenu" ><?= $comment['comment'];?><br>
+              <i class="far fa-calendar"> <?= date('d F, Y', strtotime($comment['created_at'])); ?></i>
+              <a class="sup" href="single.php?com_id=<?php echo $comment['id']; ?>">Supprimer</a>
               </p>
               <br>
             </div>

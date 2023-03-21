@@ -86,4 +86,24 @@
         $comments = $query->fetchAll();
         return $comments;
     }
+
+    //Supprimer un commentaire
+    
+    
+    function deleteCom($comment_id){
+        global $pdo;
+        $query = $pdo->prepare('DELETE FROM comments WHERE id = :id');
+        $query->execute(['id' => $comment_id]);
+    }
+
+    //Supression d'un commentaire
+
+    if(isset($_GET['com_id'])){
+
+    $comment_id = $_GET['com_id'];
+    deleteCom($comment_id);
+    header('Location:single.php?id='.$comment['post_id']);
+exit;
+}
+
 ?>
