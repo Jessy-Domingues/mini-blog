@@ -2,12 +2,21 @@
 //Traitement de single.php
 
 $id='';
-    if(isset($_GET['id']) && is_numeric($_GET['id'])) {
-        $id =$_GET['id'];
+    if(isset($_GET['id'])){
+        $id = $_GET['id'];
     }
-    if(empty($_GET['id'])) {
-        die("L'article demandé n'éxiste pas!");
-    }
+
+    $post = selectOne($id);
+    $comments = findAllComments($id);
+        //Supression d'un commentaire
+
+        if(isset($_GET['com_id'])){
+
+            $comment_id = $_GET['com_id'];
+            deleteCom($comment_id);
+            header('Location:single.php?id='.$id);
+        exit();
+        }
 
 //Sauvegarde d'un commentaire
 if(isset($_POST['add-comment'])){

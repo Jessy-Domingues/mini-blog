@@ -1,13 +1,5 @@
-<?php
-require_once 'refactoring.php';
-include_once 'traitement.php';
-
-
-
-    //selection d'un article et ses commentaires grâce à son id
-    $post = selectOne($id);
-    $comments = findAllcomments($id);
-?>
+<?php require_once 'refactoring.php'; ?>
+<?php include 'traitement.php'; ?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -54,7 +46,7 @@ include_once 'traitement.php';
               <h3 class="auteur">Ecrit par <?= $comment['auteur'];?> </h3>
               <p class="contenu" ><?= $comment['comment'];?><br>
               <i class="far fa-calendar"> <?= date('d F, Y', strtotime($comment['created_at'])); ?></i>
-              <a class="sup" href="single.php?com_id=<?php echo $comment['id']; ?>">Supprimer</a>
+              <a class="sup" href="single.php?=<?php echo $id ?>&amp;com_id=<?php echo $comment['id']; ?>">Supprimer</a>
               </p>
               <br>
             </div>

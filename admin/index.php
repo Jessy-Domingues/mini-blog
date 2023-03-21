@@ -1,6 +1,16 @@
 <?php 
-    require_once '../refactoring.php';
-    $posts = selectAll();
+require_once '../refactoring.php';
+
+$perPage = 5;
+$nombreTotal = pagination() ;
+$noPage=1;
+$pages = ceil($nombreTotal/$perPage);
+
+if(isset($_GET['page'])){
+  $noPage = $_GET['page'];
+}
+
+    $posts = selectAll($noPage,$perPage);
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +40,7 @@
             <div class="admin-content">
                 <div class="button-group">
                     <a href="create.php" class="btn btn-big">Ajouter un article</a>
-                    <a href="index.html" class="btn btn-big">Gérer des articles</a>
+                    <a href="edit.php" class="btn btn-big">Gérer des articles</a>
                 </div>
                 <div class="container">
                     <h2 class="page-title">Gestion des articles</h2>
@@ -58,6 +68,16 @@
             </div>
         </div>
         
+<!-- Pagination -->
+<div class="pagination">
+        <?php 
+        for ($i=1; $i<=$pages; $i++){?>
+          <a href="index.php?page=<?= $i ?>" class="page <?= ($noPage == $i)?'active':'' ?>"><?= $i ?></a>
+         <?php
+        }
+        ?>
+    </div>
+
  <?php include('../inc/footer.php'); ?>
 
     </body>

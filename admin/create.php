@@ -77,7 +77,7 @@ require_once '../refactoring.php';
             <div class="admin-content">
                 <div class="button-group">
                     <a href="create.php" class="btn btn-big">Ajout d'un article</a>
-                    <a href="index.html" class="btn btn-big">Gérer les articles</a>
+                    <a href="edit.php" class="btn btn-big">Gérer les articles</a>
                 </div>
 
 

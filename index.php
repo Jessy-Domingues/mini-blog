@@ -1,10 +1,18 @@
 <?php 
-//connexion à la base de données
 
   require_once 'refactoring.php';
+
+$perPage = 3;
+$nombreTotal = pagination() ;
+$noPage=1;
+$pages = ceil($nombreTotal/$perPage);
+if(isset($_GET['page'])){
+  $noPage = $_GET['page'];
+}
+
     //récupération de tous les articles de ma base
     //SELECT * FROM posts ORDER BY created_at DESC LIMIT 0,3
-    $posts = selectAll();
+    $posts = selectAll($noPage,$perPage);
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +53,15 @@
           
       </div>
     </div>
-    
+    <!-- Pagination -->
+    <div class="pagination">
+        <?php 
+        for ($i=1; $i<=$pages; $i++){?>
+          <a href="index.php?page=<?= $i ?>" class="page <?= ($noPage == $i)?'active':'' ?>"><?= $i ?></a>
+         <?php
+        }
+        ?>
+    </div>
     <!-- footer -->
     <?php include('inc/footer.php'); ?>
     

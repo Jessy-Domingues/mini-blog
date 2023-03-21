@@ -29,7 +29,7 @@
             <div class="admin-content">
                 <div class="button-group">
                     <a href="create.html" class="btn btn-big">Ajouter un article</a>
-                    <a href="index.html" class="btn btn-big">Gérer des articles</a>
+                    <a href="edit.php" class="btn btn-big">Gérer des articles</a>
                 </div>
 
 

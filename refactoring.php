@@ -17,9 +17,9 @@
     }
 
     //récupération de tous les articles dans la base
-    function selectAll(){
+    function selectAll($noPage,$perPage){
         global $pdo;
-        $results = $pdo->query('SELECT * FROM posts ORDER BY created_at DESC LIMIT 0,3');
+        $results = $pdo->query('SELECT * FROM posts ORDER BY created_at DESC LIMIT '.($perPage*($noPage-1)).','.$perPage);
         $posts = $results->fetchAll();
         return $posts;
     }
@@ -32,6 +32,14 @@
         $post = $query->fetch();
         return $post;
     }
+//Selection de tous les articles en nombre de ligne
+function pagination(){
+    global $pdo;
+    $query = $pdo->prepare('SELECT COUNT(*) as nbr_articles FROM posts');
+    $query->execute([]);
+    $nombre = $query->fetch();
+    return $nombre['nbr_articles'];
+}
 
     //Enregistrement d'un article
     function create($author,$title,$content,$image){
@@ -96,14 +104,5 @@
         $query->execute(['id' => $comment_id]);
     }
 
-    //Supression d'un commentaire
-
-    if(isset($_GET['com_id'])){
-
-    $comment_id = $_GET['com_id'];
-    deleteCom($comment_id);
-    header('Location:single.php?id='.$comment['post_id']);
-exit;
-}
 
 ?>
