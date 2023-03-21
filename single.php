@@ -46,7 +46,7 @@
               <h3 class="auteur">Ecrit par <?= $comment['auteur'];?> </h3>
               <p class="contenu" ><?= $comment['comment'];?><br>
               <i class="far fa-calendar"> <?= date('d F, Y', strtotime($comment['created_at'])); ?></i>
-              <a class="sup" href="single.php?=<?php echo $id ?>&amp;com_id=<?php echo $comment['id']; ?>">Supprimer</a>
+              <a class="sup" href="single.php?id=<?= $id ?>&delete=<?= $comment['id'] ?>">Supprimer</a>
               </p>
               <br>
             </div>

@@ -98,10 +98,10 @@ function pagination(){
     //Supprimer un commentaire
     
     
-    function deleteCom($comment_id){
+    function deleteCom($id){
         global $pdo;
         $query = $pdo->prepare('DELETE FROM comments WHERE id = :id');
-        $query->execute(['id' => $comment_id]);
+        $query->execute(['id' => $id]);
     }
 
 

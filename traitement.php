@@ -10,11 +10,11 @@ $id='';
     $comments = findAllComments($id);
         //Supression d'un commentaire
 
-        if(isset($_GET['com_id'])){
+        if(isset($_GET['delete'])){
 
-            $comment_id = $_GET['com_id'];
-            deleteCom($comment_id);
-            header('Location:single.php?id='.$id);
+            $id = $_GET['delete'];
+            deleteCom($id);
+            header('Location:single.php?id='.$_GET['id']);
         exit();
         }
 
